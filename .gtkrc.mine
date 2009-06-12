@@ -1,0 +1,6 @@
+#设置所用的图标主题
+gtk-icon-theme-name = "gnome-brave"
+#设置鼠标指针主题
+gtk-cursor-theme-name = "white"
+gtk-toolbar-style = GTK_TOOLBAR_ICONS
+

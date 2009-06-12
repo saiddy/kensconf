@@ -1,0 +1,260 @@
+# awesome-git 
+# config by PhrAok 07/03/2008
+# Modified by Blu3ness, Mar 7. :)
+# man awesomerc  http://www.calmar.ws/awesome/awesomerc.5.html
+
+screen 0
+{
+    general
+    {
+        border = 1
+        snap = 8
+        resize_hints = false
+        new_get_focus = true
+        new_become_master = false
+        floating_placement = smart
+	opacity_focused = 1.0
+	opacity_unfocused = 1.0
+    }
+    titlebar {
+        position = "top" 
+        text_align = "center"
+        styles { normal { shadow = "#e3e3e3" shadow_offset = "1" } focus { shadow = "#111111" shadow_offset = "1" } }
+        height = "14" 
+	}
+
+    styles
+    {
+      normal { font = "Monaco 9" fg = "#454545" bg = "#e3e3e3" border = "#cccccc" shadow = "#cccccc" shadow_offset = "1" }
+      focus { fg = "#ffffff" bg = "#1387e1" border = "#5ba8de" shadow = "#111111" shadow_offset = "1" }
+      urgent {fg = "#ffffff" bg = "#d53737" shadow = "#111111" shadow_offset = "1"}
+    }
+
+    tags
+    {
+        tag 1:terms { layout = "tile" mwfact = 0.50 }
+        tag 2:web { layout = "floating" mwfact = 0.80 }
+        tag 3:code { layout = "tilebottom" mwfact = 0.40 nmaster = 2 }
+        tag 4:im { layout = "floating" }
+        tag 5:float { layout = "floating" }
+    }
+
+    layouts
+    {
+	layout tile { image = "/usr/share/awesome/icons/layouts/tile.png" }
+        layout tileleft { image = "/usr/share/awesome/icons/layouts/tileleft.png" }
+        layout tilebottom { image = "/usr/share/awesome/icons/layouts/tilebottom.png" }
+        layout tiletop { image = "/usr/share/awesome/icons/layouts/tiletop.png" }
+        layout max { image = "/usr/share/awesome/icons/layouts/max.png" }
+        layout spiral { image = "/usr/share/awesome/icons/layouts/spiral.png" }
+        layout dwindle { image = "/usr/share/awesome/icons/layouts/dwindle.png" }
+        layout floating { image = "/usr/share/awesome/icons/layouts/floating.png" }
+    }
+
+    statusbar top
+    {
+        position = "top"
+        height = "14"
+ 
+        taglist tl
+        {
+            mouse { button = "1" command = "tag_view" }
+            mouse { button = "1" modkey = {"Mod4"}  command = "client_tag" }
+            mouse { button = "3" command = "tag_toggleview" }
+            mouse { button = "3" modkey = {"Mod4"} command = "client_toggletag" }
+            mouse { button = "5" command = "tag_viewnext" }
+            mouse { button = "4" command = "tag_viewprev" }
+        }
+
+        layoutinfo li
+        {
+            mouse { button = "1" command = "tag_setlayout" arg = "+1" }
+            mouse { button = "4" command = "tag_setlayout" arg = "+1" }
+            mouse { button = "3" command = "tag_setlayout" arg = "-1" }
+            mouse { button = "5" command = "tag_setlayout" arg = "-1" }
+        }
+
+#        textbox sep01 {text = "                                  " }
+        textbox mpd { text = "" align = "right"  style { fg = "#3681C2" } }
+		graph mem {
+		   width = "30"
+		   height = "0.80"
+		   data mem_used {
+		   scale = true 
+		   max = 512
+		   draw_style = bottom
+	           fg = "#1387e1"
+		   }
+		   bg = "#cccccc"
+		   bordercolor = "#e3e3e3"
+		   align = "right"
+		  }
+		
+	textbox cpu_freq { align = "right" style { fg ="#727272" }}
+        progressbar pb_vol
+        {
+            data master { bg = "#cccccc" fg = "#1387e1" fg_center = "#1387e1" fg_end = "#1387e1" fg_off = "#89a7be" bordercolor="#e3e3e3" }
+            width = "11" height = "0.9" gap = 1 align = "right" vertical = "true"
+            ticks_count = "4" ticks_gap = "1"
+            mouse { button = "4" command = "spawn" arg = "exec amixer -c0 sset Master 2dB+ >/dev/null" }
+            mouse { button = "5" command = "spawn" arg = "exec amixer -c0 sset Master 2dB- >/dev/null" }
+        }
+        textbox clock_day { align = "right" style { fg = "#727272" }}
+
+  iconbox logo
+        { 
+            image = "/usr/share/awesome/icons/awesome16.png"
+            mouse
+            {
+                button = "1"
+                command = "spawn"
+                arg = "exec xterm -e man awesome"
+             }
+            align = "right"
+         } 
+}
+
+    statusbar bottom
+    {
+      position = "bottom"
+      height = "16"
+
+      tasklist taskbottom
+      {
+        show_icons = true 
+        show = all
+        text_align = center
+        mouse { button = "3" command = "client_kill" }
+        mouse { button = "4" command = "client_focusnext" } 
+        mouse { button = "5" command = "client_focusprev" } 
+        mouse { modkey = {"Mod1"} button = "4" command = "client_swapnext" } 
+        mouse { modkey = {"Mod1"} button = "5" command = "client_swapprev" } 
+      }
+      textbox sep01 {text = "                                  " align="right"}
+    }
+}
+
+rules
+    {
+        rule { name = "A Window" opacity = 0.1 }
+    	rule { name = "Gimp" tags = "3:code" float = "true" }
+        rule { name = "qq" tags = "4:im" float = "true" titlebar { position = off }}
+        rule { name = "Pidgin" tags = "4:im" float = "true" }
+        rule { name = "Mplayer" tags = "5:float"}
+        rule { name = "Deluge" tags = "5:float" }
+        rule { name = "thunar" float = "true" tags = "5:float" }
+        rule { name = "Opera" tags = "2:web" }
+        rule { name = "Gmlive" float = "true" }
+        rule { name = "gvim" tags = "3:code" float = "false" titlebar { position = off } }
+        rule { name = "Firefox" tags = "2:web" }
+        rule { name = "Minefield" tags = "2:web" titlebar { position = off }}
+        rule { name = "Vimperator" tags = "2:web" }
+        rule { name = "trayer" titlebar { position = off }}
+        rule { name = "evince" titlebar { position = off }}
+        rule { name = "Download" float = "ture" }
+		rule { name = "Dialog" float = "ture" }
+		rule { name = "qiv" float = "ture" }
+		rule { name = "feh" float = "ture" }
+    }
+
+    mouse
+    {
+        root
+        {
+            button = "5"
+            command = "tag_viewnext"
+        }
+        root
+        {
+            button = "4"
+            command = "tag_viewprev"
+        }
+        client
+        {
+            modkey = {"Mod4"}
+            button = "1"
+            command = "client_movemouse"
+        }
+        client
+        {
+            modkey = {"Mod4"}
+            button = "2"
+            command = "client_zoom"
+        }
+        client
+        {
+            modkey = {"Mod4"}
+            button = "3"
+            command = "client_resizemouse"
+        }
+        titlebar
+		{ button = "1" command = "client_movemouse" }
+		titlebar 
+		{ button = "3" command = "client_kill" }
+    }
+
+keys 
+    { 
+    #
+        key { modkey = {"Mod4"} key = "F1" command = "spawn" arg = "for i in /usr/share/man/man?;do ls $i; done | cut -d. -f1 | awesome-menu -e 'xterm -e man ' 'See manual page for:'" }
+        key { modkey = {"Mod4"} key = "F2" command = "spawn" arg = "ls /usr/bin | awesome-menu -e 'exec ' 'awesomeRun:'" }
+        key { modkey = {"Mod4"} key = "F3" command = "spawn" arg = "cut -d' ' -f1 ~/.ssh/known_hosts | cut -d, -f1 | awesome-menu -e 'xterm -e ssh ' 'ssh to:'" }
+	key { modkey = {"Mod4"} key = "space"	command = "tag_setlayout" arg = "+1" } 
+	key { modkey = {"Mod4", "Shift"} key = "space"	command = "tag_setlayout" arg = "-1" } 
+	key { modkey = {"Mod4"} key = "b"	 command = "statusbar_toggle" } 
+	key { modkey = {"Mod4"} key = "j" command = "client_focusnext" }
+	key { modkey = {"Mod1"} key = "Tab" command = "client_focusnext" }
+	key { modkey = {"Mod4"} key = "k" command = "client_focusprev" } 
+	key { modkey = {"Mod4"} key = "Tab" command = "tag_viewnext" } 
+	key { modkey = {"Mod4", "Shift"} key = "j" command = "client_swapnext" } 
+	key { modkey = {"Mod4", "Shift"} key = "k" command = "client_swapprev" } 
+	key { modkey = {"Mod4", "Control"} key = "j" command = "screen_focus" arg = "+1" } 
+	key { modkey = {"Mod4", "Control"} key = "k" command = "screen_focus" arg = "-1" } 
+	key { modkey = {"Mod4"} key = "h"	 command = "tag_setmwfact" arg = "-0.05" } 
+	key { modkey = {"Mod4"} key = "l" command = "tag_setmwfact" arg = "+0.05" } 
+	key { modkey = {"Mod4", "Shift"} key = "h" command = "tag_setnmaster" arg = "+1" } 
+	key { modkey = {"Mod4", "Shift"} key = "l" command = "tag_setnmaster" arg = "-1" } 
+	key { modkey = {"Mod4", "Control"} key = "h" command = "tag_setncol" arg = "+1" } 
+	key { modkey = {"Mod4", "Control"} key = "l" command = "tag_setncol" arg = "-1" } 
+	key { modkey = {"Mod1"} key = "Escape" command = "client_focusprev" } 
+	key { modkey = {"Mod4"} key = "Escape" command = "tag_viewprev" } 
+	key { modkey = {"Mod4"} key = "m" command = "client_togglemax" } 
+	key { modkey = {"Mod1"} key = "Return" command = "client_zoom" }
+	key { modkey = {"Mod4", "Control"} key = "space" command = "client_togglefloating" } 
+	key { modkey = {"Mod4"} key = "s" command = "client_togglescratch" } 
+	key { modkey = {"Mod4", "Control"} key = "s" command = "client_setscratch" } 
+    key { modkey = {"Mod4", "Control"}  key = "s" command = "client_setscratch"  }
+    key { modkey = {"Mod1"} key = "F1" command = "spawn" arg = "find /usr/bin -type f - executable ! -empty | sed 's,.*/,,' | awesome-menu -e 'exec ' Execute:" }
+	key { modkey = {"Mod1"} key = "F4" command = "client_kill" } 
+	key { modkey = {"Mod1", "Shift"} key = "q" command = "client_kill" } 
+	key { modkey = {"Mod4", "Shift"} key = "r"	command = "exec" arg = "awesome" } 
+	key { modkey = {"Mod4", "Control"} key = "r" command = "restart" }
+	key { modkey = {"Mod4"} key = "0"	 command = "tag_view" }
+    #apps
+	key { modkey = {"Mod4"} key = "o" command = "spawn" arg = "exec opera" }
+	key { modkey = {"Mod4"} key = "f" command = "spawn" arg = "exec firefox-bin" }
+	key { modkey = {"Mod4"} key = "Return" command = "spawn" arg = "exec xterm" } 
+	key { modkey = {"Mod4"} key = "r" command = "spawn" arg = "exec thunar" } 
+	key { modkey = {"Mod1"} key = "F2" command = "spawn" arg = "dmenu_path | awesome-menu -e 'exec ' 'dmenuRun:'" }   
+	key { modkey = {"Mod4"} key = "e" command = "spawn" arg = "exec emesene" }
+	key { modkey = {"Mod4"} key = "v" command = "spawn" arg = "exec gvim" }
+    key { modkey = {"Mod4", "Shift"} key = "c" command = "client_kill" }
+    key { modkey = {"Mod4", "Shift"} key = "q" command = "client_kill" }
+    key { modkey = {"Mod4", "Control"} key = "BackSpace" command = "quit" }
+    key { modkey = {"Mod4"} key = "Print"  command = "spawn"  arg = "exec scrot -d 3" }
+    key { modkey = {"Mod4", "Shift"} key = "Return" command = "spawn" arg = "exec urxvt -tr"  }
+    key { modkey = {"Mod4"} key = "c"  command = "spawn"  arg = "exec conky" }
+	key { modkey = {"Mod1", "Control"} key = "Up" command = "spawn" arg = "amixer sset Master,0 5%+ && awesome-message -x   1000 -y 16 -d 3 VOL+++++++" }
+    key { modkey = {"Mod1", "Control"} key = "Down" command = "spawn" arg = "amixer sset Master,0 5%- && awesome-message -x 1000 -y 16 -d 3 VOL-------" }
+    
+	#switch
+	keylist { modkey = {"Mod4"} command = "tag_view" keylist = { 1, 2, 3, 4, 5, 6, 7, 8, 9 } arglist = { 1, 2, 3, 4, 5, 6, 7, 8, 9 } } 
+	key { modkey = {"Mod4", "Control"} key = "0" command = "tag_toggleview" } 
+	keylist { modkey = {"Mod4", "Control"} command = "tag_toggleview" keylist = { 1, 2, 3, 4, 5, 6, 7, 8, 9 } arglist = { 1, 2, 3, 4, 5, 6, 7, 8, 9 } } 
+	key { modkey = {"Mod4", "Shift"} key = "0" command = "client_tag" } 
+	keylist { modkey = {"Mod4", "Shift"} command = "client_tag" keylist = { 1, 2, 3, 4, 5, 6, 7, 8, 9 } arglist = { 1, 2, 3, 4, 5, 6, 7, 8, 9 } } 
+	key { modkey = {"Mod4", "Shift", "Control"} key = "0" command = "client_toggletag" } 
+	keylist { modkey = {"Mod4", "Shift", "Control"} command = "client_toggletag" keylist = { 1, 2, 3, 4, 5, 6, 7, 8, 9 } arglist = { 1, 2, 3, 4, 5, 6, 7, 8, 9 } } 
+    } 
+
+# vim: filetype=conf

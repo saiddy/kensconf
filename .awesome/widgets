@@ -1,0 +1,9 @@
+#!/bin/bash
+while true
+do
+  echo 0 widget_tell top clock_day text "[`date +"%a %Y-%m-%d %H:%M:%S"`]" | awesome-client
+  echo 0 widget_tell top mem data mem_used `free -m | tail -n 2 | head -n 1 | awk '{print $3}'` | awesome-client
+  echo 0 widget_tell top cpu_freq text "[CPU:`cat /sys/class/hwmon/hwmon0/device/temp2_input | cut -c1,2 `°C]" | awesome-client
+  echo 0 widget_tell top  mpd text "[Music:`mpc | head -n 1`]" | awesome-client 
+  sleep 3
+done

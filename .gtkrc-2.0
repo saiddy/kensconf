@@ -1,0 +1,16 @@
+# -- THEME AUTO-WRITTEN DO NOT EDIT
+include "/usr/share/themes/Glossy/gtk-2.0/gtkrc"
+
+style "user-font" {
+	font_name = "iYB2Hei 10"
+}
+
+widget_class "*" style "user-font"
+
+gtk-font-name="iYB2Hei 10"
+
+gtk-theme-name  = "Glossy"
+
+include "/home/ken/.gtkrc.mine"
+
+# -- THEME AUTO-WRITTEN DO NOT EDIT
