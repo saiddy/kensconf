@@ -3,9 +3,8 @@
 # .xsession/.xinitrc
 #
 # choose a window manager
-#
-# 这里可以设置一些环境变量：
 
+# 这里可以设置一些环境变量：
 xrdb /home/ken/.Xresources
 feh --bg-center /home/ken/picture/arch.png
 numlockx &
@@ -31,7 +30,7 @@ WINDOWMANAGER=awesome
 exec xcompmgr -cC -t-5 -l-5 -r4.2 -o.55 &
 exec /home/ken/.awesome/widgets &
 exec trayer --edge bottom --align right --widthtype request --height 14 --expand true --transparent true --alpha 0 --tint 0x252525 --padding 5 &
-exec volwheel &  # 这里我加入了两个程序随 fluxbox 启动
+exec volwheel &
 exec parcellite &
 exec fcitx &
 ;;
