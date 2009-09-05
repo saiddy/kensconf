@@ -17,19 +17,41 @@ screen 0
 	opacity_unfocused = 1.0
     }
     titlebar {
-        position = "top" 
+        position = "off" 
         text_align = "center"
         styles { normal { shadow = "#e3e3e3" shadow_offset = "1" } focus { shadow = "#111111" shadow_offset = "1" } }
         height = "14" 
 	}
 
-    styles
+ #   styles
+  #  {
+  #    normal { font = "terminus 9" fg = "#454545" bg = "#e3e3e3" border = "#cccccc" shadow = "#cccccc" shadow_offset = "1" }
+  #    focus { fg = "#ffffff" bg = "#1387e1" border = "#5ba8de" shadow = "#111111" shadow_offset = "1" }
+ #     urgent {fg = "#ffffff" bg = "#d53737" shadow = "#111111" shadow_offset = "1"}
+  #  }
+styles    # global statusbar/titlebar prefs
     {
-      normal { font = "Monaco 9" fg = "#454545" bg = "#e3e3e3" border = "#cccccc" shadow = "#cccccc" shadow_offset = "1" }
-      focus { fg = "#ffffff" bg = "#1387e1" border = "#5ba8de" shadow = "#111111" shadow_offset = "1" }
-      urgent {fg = "#ffffff" bg = "#d53737" shadow = "#111111" shadow_offset = "1"}
-    }
-
+        normal
+        {
+            font = "Terminus 8"
+            fg = "#888888"
+            bg = "#252525"
+            border = "#555555"
+        }
+        focus
+        {
+            fg = "#ffffff"
+            bg = "#0066ff"
+		#	bg = "#1387e1"
+            border = "#ff6666"
+		#	border = "#1387e1"
+        }
+        urgent
+        {
+            fg = "#111111"
+            bg = "#ff4500"
+        }
+     }
     tags
     {
         tag 1:terms { layout = "tile" mwfact = 0.50 }
@@ -41,14 +63,14 @@ screen 0
 
     layouts
     {
-	layout tile { image = "/usr/share/awesome/icons/layouts/tile.png" }
-        layout tileleft { image = "/usr/share/awesome/icons/layouts/tileleft.png" }
-        layout tilebottom { image = "/usr/share/awesome/icons/layouts/tilebottom.png" }
-        layout tiletop { image = "/usr/share/awesome/icons/layouts/tiletop.png" }
-        layout max { image = "/usr/share/awesome/icons/layouts/max.png" }
-        layout spiral { image = "/usr/share/awesome/icons/layouts/spiral.png" }
-        layout dwindle { image = "/usr/share/awesome/icons/layouts/dwindle.png" }
-        layout floating { image = "/usr/share/awesome/icons/layouts/floating.png" }
+	    layout tile { image = "/home/ken/.awesome/icons/layouts/txt/tile.png" }
+        layout tileleft { image = "/home/ken/.awesome/icons/layouts/txt/tileleft.png" }
+        layout tilebottom { image = "/home/ken/.awesome/icons/layouts/txt/tilebottom.png" }
+        #layout tiletop { image = "/usr/share/awesome/icons/layouts/tiletopw.png" }
+        layout max { image = "/home/ken/.awesome/icons/layouts/txt/max.png" }
+        #layout spiral { image = "/usr/share/awesome/icons/layouts/spiralw.png" }
+        #layout dwindle { image = "/usr/share/awesome/icons/layouts/dwindlew.png" }
+        layout floating { image = "/home/ken/.awesome/icons/layouts/txt/floating.png" }
     }
 
     statusbar top
@@ -74,34 +96,28 @@ screen 0
             mouse { button = "5" command = "tag_setlayout" arg = "-1" }
         }
 
-#        textbox sep01 {text = "                                  " }
-        textbox mpd { text = "" align = "right"  style { fg = "#3681C2" } }
-		graph mem {
-		   width = "30"
-		   height = "0.80"
-		   data mem_used {
-		   scale = true 
-		   max = 512
-		   draw_style = bottom
-	           fg = "#1387e1"
-		   }
-		   bg = "#cccccc"
-		   bordercolor = "#e3e3e3"
-		   align = "right"
-		  }
-		
-	textbox cpu_freq { align = "right" style { fg ="#727272" }}
-        progressbar pb_vol
-        {
-            data master { bg = "#cccccc" fg = "#1387e1" fg_center = "#1387e1" fg_end = "#1387e1" fg_off = "#89a7be" bordercolor="#e3e3e3" }
-            width = "11" height = "0.9" gap = 1 align = "right" vertical = "true"
-            ticks_count = "4" ticks_gap = "1"
-            mouse { button = "4" command = "spawn" arg = "exec amixer -c0 sset Master 2dB+ >/dev/null" }
-            mouse { button = "5" command = "spawn" arg = "exec amixer -c0 sset Master 2dB- >/dev/null" }
-        }
-        textbox clock_day { align = "right" style { fg = "#727272" }}
-
-  iconbox logo
+        textbox sep01 {text = "                      " }
+        textbox mpd { text = "" align = "right"  style { fg = "#FFB44B" } }
+        textbox spacer1   { align = "right"    text = " | "   style { fg = "#515151" } }
+		textbox cpu_freq { align = "right" style { fg ="#78e6d1" }}
+		textbox cpu_per { align = "right" style { fg ="#4e9a06" }}
+		textbox cpu_temp { align = "right" style { fg ="#cffb7e" }}
+        textbox cpu_avg { align = "right" style { fg ="#6b86f8" }}
+		textbox spacer2   { align = "right"    text = " | "   style { fg = "#515151" } }
+		textbox mem { align = "right" style { fg = "#e896b6" }}
+		textbox spacer3   { align = "right"    text = " | "   style { fg = "#515151" } }
+		textbox clock { align = "right" style { fg = "#ffffff" }}
+	    textbox spacer4  { align = "right"    text = " | "   style { fg = "#515151" } }
+#	    progressbar pb_vol
+#        {
+#            data master { bg = "#cccccc" fg = "#1387e1" fg_center = "#1387e1" fg_end = "#1387e1" fg_off = "#89a7be" bordercolor="#e3e3e3" }
+#            width = "11" height = "0.9" gap = 1 align = "right" vertical = "true"
+#            ticks_count = "4" ticks_gap = "1"
+#            mouse { button = "4" command = "spawn" arg = "exec amixer -c0 sset Master 2dB+ >/dev/null" }
+#            mouse { button = "5" command = "spawn" arg = "exec amixer -c0 sset Master 2dB- >/dev/null" }
+#        }
+#        textbox spacer5   { align = "right"    text = " | "   style { fg = "#515151" } }
+        iconbox logo
         { 
             image = "/usr/share/awesome/icons/awesome16.png"
             mouse
@@ -142,12 +158,13 @@ rules
         rule { name = "Pidgin" tags = "4:im" float = "true" }
         rule { name = "Mplayer" tags = "5:float"}
         rule { name = "Deluge" tags = "5:float" }
-        rule { name = "thunar" float = "true" tags = "5:float" }
-        rule { name = "Opera" tags = "2:web" }
+        rule { name = "Thunar" float = "true" tags = "5:float" }
+        rule { name = "Opera" tags = "2:web" titlebar { position = off } }
         rule { name = "Gmlive" float = "true" }
         rule { name = "gvim" tags = "3:code" float = "false" titlebar { position = off } }
+		rule { name = "geany" tags = "3:code" float = "false" titlebar { position = off } }
         rule { name = "Firefox" tags = "2:web" }
-        rule { name = "Minefield" tags = "2:web" titlebar { position = off }}
+        rule { name = "Swiftfox" tags = "2:web" }
         rule { name = "Vimperator" tags = "2:web" }
         rule { name = "trayer" titlebar { position = off }}
         rule { name = "evince" titlebar { position = off }}
@@ -155,7 +172,8 @@ rules
 		rule { name = "Dialog" float = "ture" }
 		rule { name = "qiv" float = "ture" }
 		rule { name = "feh" float = "ture" }
-    }
+        rule { name = "thunder" float = "ture" }
+	}
 
     mouse
     {
@@ -196,16 +214,18 @@ rules
 keys 
     { 
     #
-        key { modkey = {"Mod4"} key = "F1" command = "spawn" arg = "for i in /usr/share/man/man?;do ls $i; done | cut -d. -f1 | awesome-menu -e 'xterm -e man ' 'See manual page for:'" }
-        key { modkey = {"Mod4"} key = "F2" command = "spawn" arg = "ls /usr/bin | awesome-menu -e 'exec ' 'awesomeRun:'" }
-        key { modkey = {"Mod4"} key = "F3" command = "spawn" arg = "cut -d' ' -f1 ~/.ssh/known_hosts | cut -d, -f1 | awesome-menu -e 'xterm -e ssh ' 'ssh to:'" }
+    key { modkey = {"Mod4"} key = "F1" command = "spawn" arg = "for i in /usr/share/man/man?;do ls $i; done | cut -d. -f1 | awesome-menu -e 'xterm -e man ' 'See manual page for:'" }
+    key { modkey = {"Mod4"} key = "F2" command = "spawn" arg = "ls /usr/bin | awesome-menu -e 'exec ' 'awesomeRun:'" }
+    key { modkey = {"Mod4"} key = "F3" command = "spawn" arg = "cut -d' ' -f1 ~/.ssh/known_hosts | cut -d, -f1 | awesome-menu -e 'xterm -e ssh ' 'ssh to:'" }
 	key { modkey = {"Mod4"} key = "space"	command = "tag_setlayout" arg = "+1" } 
 	key { modkey = {"Mod4", "Shift"} key = "space"	command = "tag_setlayout" arg = "-1" } 
 	key { modkey = {"Mod4"} key = "b"	 command = "statusbar_toggle" } 
 	key { modkey = {"Mod4"} key = "j" command = "client_focusnext" }
+	key { modkey = {"Mod4"} key = "Right" command = "client_focusnext" }
 	key { modkey = {"Mod1"} key = "Tab" command = "client_focusnext" }
-	key { modkey = {"Mod4"} key = "k" command = "client_focusprev" } 
-	key { modkey = {"Mod4"} key = "Tab" command = "tag_viewnext" } 
+	key { modkey = {"Mod4"} key = "k" command = "client_focusprev" }
+	key { modkey = {"Mod4"} key = "Left" command = "client_focusprev" } 
+	key { modkey = {"Mod4"} key = "Tab" command = "client_focusnext" } 
 	key { modkey = {"Mod4", "Shift"} key = "j" command = "client_swapnext" } 
 	key { modkey = {"Mod4", "Shift"} key = "k" command = "client_swapprev" } 
 	key { modkey = {"Mod4", "Control"} key = "j" command = "screen_focus" arg = "+1" } 
@@ -231,22 +251,25 @@ keys
 	key { modkey = {"Mod4", "Control"} key = "r" command = "restart" }
 	key { modkey = {"Mod4"} key = "0"	 command = "tag_view" }
     #apps
-	key { modkey = {"Mod4"} key = "o" command = "spawn" arg = "exec opera" }
-	key { modkey = {"Mod4"} key = "f" command = "spawn" arg = "exec firefox-bin" }
+	key { modkey = {"Mod4", "Shift"} key = "f" command = "spawn" arg = "exec firefox" }
 	key { modkey = {"Mod4"} key = "Return" command = "spawn" arg = "exec xterm" } 
 	key { modkey = {"Mod4"} key = "r" command = "spawn" arg = "exec thunar" } 
 	key { modkey = {"Mod1"} key = "F2" command = "spawn" arg = "dmenu_path | awesome-menu -e 'exec ' 'dmenuRun:'" }   
-	key { modkey = {"Mod4"} key = "e" command = "spawn" arg = "exec emesene" }
-	key { modkey = {"Mod4"} key = "v" command = "spawn" arg = "exec gvim" }
+	key { modkey = {"Mod4"} key = "v" command = "spawn" arg = "exec geany" }
     key { modkey = {"Mod4", "Shift"} key = "c" command = "client_kill" }
     key { modkey = {"Mod4", "Shift"} key = "q" command = "client_kill" }
     key { modkey = {"Mod4", "Control"} key = "BackSpace" command = "quit" }
     key { modkey = {"Mod4"} key = "Print"  command = "spawn"  arg = "exec scrot -d 3" }
-    key { modkey = {"Mod4", "Shift"} key = "Return" command = "spawn" arg = "exec urxvt -tr"  }
-    key { modkey = {"Mod4"} key = "c"  command = "spawn"  arg = "exec conky" }
+    key { modkey = {"Mod4", "Shift"} key = "Return" command = "spawn" arg = "exec urxvt"  }
 	key { modkey = {"Mod1", "Control"} key = "Up" command = "spawn" arg = "amixer sset Master,0 5%+ && awesome-message -x   1000 -y 16 -d 3 VOL+++++++" }
     key { modkey = {"Mod1", "Control"} key = "Down" command = "spawn" arg = "amixer sset Master,0 5%- && awesome-message -x 1000 -y 16 -d 3 VOL-------" }
-    
+    #mpc
+    key { modkey = {"Mod4", "Control"} key = "h" command = "spawn" arg = "mpc prev" }
+	key { modkey = {"Mod4", "Control"} key = "t" command = "spawn" arg = "mpc pause" }
+	key { modkey = {"Mod4", "Control"} key = "n" command = "spawn" arg = "mpc play" }
+	key { modkey = {"Mod4", "Control"} key = "s" command = "spawn" arg = "mpc next" }
+	key { modkey = {"Mod4", "Control"} key = "g" command = "spawn" arg = "mpc seek -2%" }
+	key { modkey = {"Mod4", "Control"} key = "l" command = "spawn" arg = "mpc seek +2%" }
 	#switch
 	keylist { modkey = {"Mod4"} command = "tag_view" keylist = { 1, 2, 3, 4, 5, 6, 7, 8, 9 } arglist = { 1, 2, 3, 4, 5, 6, 7, 8, 9 } } 
 	key { modkey = {"Mod4", "Control"} key = "0" command = "tag_toggleview" } 
