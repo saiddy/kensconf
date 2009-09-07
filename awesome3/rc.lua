@@ -41,7 +41,7 @@ require("teardrop")
 -- {{{ Variable definitions
 --
 -- Zenburn theme
-beautiful.init(awful.util.getdir("config") .. "/themes/zenburn.lua")
+beautiful.init(awful.util.getdir("config") .. "/zenburn.lua")
 --theme_path = os.getenv("HOME") .. "/.config/awesome/zenburn.lua"
 --beautiful.init(theme_path)
 
@@ -78,7 +78,7 @@ tags.settings = {
     { name = "main",  layout = layouts[2]  },
     { name = "web",   layout = layouts[1]  },
     { name = "code",  layout = layouts[3]  },
-    { name = "mail",  layout = layouts[7]  },
+    { name = "doc",   layout = layouts[7]  },
     { name = "im",    layout = layouts[1], mwfact = 0.75 },
     { name = "6",     layout = layouts[9], hide = true },
     { name = "7",     layout = layouts[9], hide = true },
@@ -292,6 +292,7 @@ for s = 1, screen.count() do
     wibox[s].widgets = {{
         taglist[s],
         layoutbox[s],
+--		tasklist[s],
         promptbox[s],
         layout = awful.widget.layout.horizontal.leftright
     },
@@ -344,7 +345,7 @@ globalkeys = awful.util.table.join(
     -- {{{ Applications
     awful.key({ modkey }, "Return", function () awful.util.spawn("xterm", false) end),
 	awful.key({ modkey }, "r", function () awful.util.spawn("dmenu_run -fn \"-*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*\" -nb \"#daff30\" -nf \"#888888\" -sb \"#2A2A2A\" -sf \"#daff30\"", false) end),
-    awful.key({ modkey, "Shift" }, "r", function () awful.util.spawn("thunar", false) end),
+    awful.key({ modkey, "Shift" }, "w", function () awful.util.spawn("thunar", false) end),
     awful.key({ modkey, "Shift" }, "f", function () awful.util.spawn("firefox", false) end),
     awful.key({ altkey }, "F1",  function () awful.util.spawn("urxvt", false) end),
     awful.key({ modkey }, "F2",  function () teardrop.toggle("gmrun", 1, 0.08) end),
@@ -409,6 +410,7 @@ globalkeys = awful.util.table.join(
     -- }}}
 
     -- {{{ Tag browsing
+	awful.key({ altkey }, "Tab",    awful.tag.viewnext),
     awful.key({ altkey }, "n",      awful.tag.viewnext),
     awful.key({ altkey }, "p",      awful.tag.viewprev),
     awful.key({ altkey }, "Escape", awful.tag.history.restore),
@@ -440,7 +442,6 @@ globalkeys = awful.util.table.join(
             end
         end
     end),
-    awful.key({ altkey }, "Tab", awful.client.urgent.jumpto),
     awful.key({ modkey }, "Tab", function () awful.client.focus.byidx(1);
         if client.focus then client.focus:raise() end
     end),
