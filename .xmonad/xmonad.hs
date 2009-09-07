@@ -9,6 +9,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import System.Exit
 import Graphics.X11.Xlib
+import System.IO
 import IO (Handle, hPutStrLn) 
  
 -- utils
