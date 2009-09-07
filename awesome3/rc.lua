@@ -110,7 +110,7 @@ spacer         = widget({ type = "textbox", name = "spacer" })
 separator      = widget({ type = "textbox", name = "separator" })
 spacer.text    = " "
 --separator.text = "//"
-separator.text = '<span color="#515151">|</span>'
+separator.text = '<span color="#3579a8">|</span>'
 -- }}}
 
 -- {{{ CPU usage graph and temperature
@@ -147,8 +147,8 @@ memicon.image = image(beautiful.widget_mem)
 mmwidget      = widget({ type = 'textbox', name = 'mmwidget' })
 memwidget     = awful.widget.progressbar({ layout = awful.widget.layout.horizontal.rightleft })
 -- MEM progressbar properties
-memwidget:set_width(30)
-memwidget:set_height(10)
+memwidget:set_width(25)
+memwidget:set_height(11)
 memwidget:set_vertical(true)
 memwidget:set_background_color(beautiful.fg_off_widget)
 memwidget:set_border_color(nil)
@@ -187,8 +187,8 @@ mboxwidget     = widget({ type = "textbox", name = "mboxwidget" })
 -- Register widget
 vicious.register(mboxwidget, vicious.widgets.mdir, "$1", 60, "/home/ken/Mail/Google/")
 -- Register buttons
---mboxwidget:buttons(awful.util.table.join(
---  awful.button({ }, 1, function () awful.util.spawn("urxvt -title Alpine -e alpine_exp", false) end)))
+mboxwidget:buttons(awful.util.table.join(
+  awful.button({ }, 1, function () awful.util.spawn("xterm -title Mutt -e mutt", false) end)))
 -- }}}
 
 -- {{{ Volume level, progressbar and changer
@@ -215,7 +215,7 @@ vicious.register(volwidget, vicious.widgets.volume, "$1%", 2, "Master")
 vicious.register(volbarwidget, vicious.widgets.volume, "$1", 2, "Master")
 -- Register buttons
 volbarwidget.widget:buttons(awful.util.table.join(
-    awful.button({ }, 1, function () awful.util.spawn("kmix", false) end),
+    awful.button({ }, 1, function () awful.util.spawn("xterm -title Alsamixer -e alsamixer", false) end),
     awful.button({ }, 2, function () awful.util.spawn("amixer -q sset Master toggle", false) end),
     awful.button({ }, 4, function () awful.util.spawn("amixer -q sset Master 2dB+", false) end),
     awful.button({ }, 5, function () awful.util.spawn("amixer -q sset Master 2dB-", false) end)
@@ -234,6 +234,11 @@ function (widget, args)
 		 return '<span color="#daff30">MPD:</span> ' .. args[1]
 	 end
  end)
+mpdwidget:buttons(awful.util.table.join(
+    awful.button({ }, 1, function () awful.util.spawn("mpc next", false) end),
+	awful.button({ }, 2, function () awful.util.spawn("mpc toggle", false) end),
+	awful.button({ }, 3, function () awful.util.spawn("mpc prev", false) end)
+	))
 -- }}}
 
 -- {{{ Date, time and a calendar
@@ -247,7 +252,7 @@ vicious.register(datewidget, vicious.widgets.date, "%b%e, %R", 60)
 -- Register buttons
 datewidget:buttons(awful.util.table.join(
     -- PyLendar: http://sysphere.org/~anrxc/j/archives/2009/03/11/desktop_calendars
-    awful.button({ }, 1, function () awful.util.spawn("pylendar.py", false) end)))
+    awful.button({ }, 1, function () awful.util.spawn("python /home/ken/scripts/pylendar.py", false) end)))
 -- }}}
 
 -- {{{ System tray
@@ -604,11 +609,11 @@ awful.rules.rules = {
       properties = { tag = tags[1][8] } },
     { rule = { class = "Sonata" },
       properties = { tag = tags[1][9] } },
-    { rule = { class = "Amarokapp" },
-      properties = { tag = tags[1][9] } },
+    { rule = { name = "Alsamixer" },
+      properties = { tag = tags[1][4] } },
     { rule = { class = "Gimp" },
       properties = { tag = tags[1][9] } },
-    { rule = { name = "Alpine" },
+    { rule = { name = "Mutt" },
       properties = { tag = tags[1][4] } },
     { rule = { instance = "uTorrent.exe" },
       properties = { tag = tags[screen.count()][9] } },
@@ -659,7 +664,7 @@ autorunApps =
 {
 	 "xsetroot -cursor_name left_ptr",
 	 "fcitx",
-	 "parcellite",
+	-- "parcellite",
 }
 if autorun then
 	for app = 1, #autorunApps do
