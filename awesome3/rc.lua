@@ -122,7 +122,7 @@ thermalwidget  = widget({ type = "textbox", name = "thermalwidget" })
 cpuwidget      = awful.widget.graph({ layout = awful.widget.layout.horizontal.rightleft })
 cuwidget       = widget({ type = 'textbox', name = 'cuwidget' })
 -- CPU graph properties
-cpuwidget:set_width(50)
+cpuwidget:set_width(30)
 cpuwidget:set_height(14)
 cpuwidget:set_scale(false)
 cpuwidget:set_max_value(100)
@@ -269,6 +269,32 @@ taglist.buttons = awful.util.table.join(
                     awful.button({ }, 4, awful.tag.viewnext),
                     awful.button({ }, 5, awful.tag.viewprev))
 
+tasklist = {}
+tasklist.buttons = awful.util.table.join(
+                     awful.button({ }, 1, function (c)
+                                              if not c:isvisible() then
+                                                  awful.tag.viewonly(c:tags()[1])
+                                              end
+                                              client.focus = c
+                                              c:raise()
+                                          end),
+                     awful.button({ }, 3, function ()
+                                              if instance then
+                                                  instance:hide()
+                                                  instance = nil
+                                              else
+                                                  instance = awful.menu.clients({ width=250 })
+                                              end
+                                          end),
+                     awful.button({ }, 4, function ()
+                                              awful.client.focus.byidx(1)
+                                              if client.focus then client.focus:raise() end
+                                          end),
+                     awful.button({ }, 5, function ()
+                                              awful.client.focus.byidx(-1)
+                                              if client.focus then client.focus:raise() end
+                                          end))
+
 -- Add a wibox to each screen
 for s = 1, screen.count() do
     -- Create a promptbox
@@ -283,6 +309,12 @@ for s = 1, screen.count() do
 
     -- Create the taglist
     taglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, taglist.buttons)
+
+    -- Create a tasklist widget
+    tasklist[s] = awful.widget.tasklist(function(c)
+                                              return awful.widget.tasklist.label.currenttags(c, s)
+                                          end, tasklist.buttons)
+
     -- Create the wibox
     wibox[s] = awful.wibox({
         position = "top", height = 16, screen = s,
@@ -292,7 +324,6 @@ for s = 1, screen.count() do
     wibox[s].widgets = {{
         taglist[s],
         layoutbox[s],
---		tasklist[s],
         promptbox[s],
         layout = awful.widget.layout.horizontal.leftright
     },
@@ -311,6 +342,8 @@ for s = 1, screen.count() do
         cpuwidget, spacer, cuwidget, thermalwidget, cpuicon,
 		separator,
 		mpdwidget, mpdicon,
+		separator,
+		tasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
 end
