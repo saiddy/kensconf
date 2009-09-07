@@ -7,13 +7,13 @@
 -- {{{ Main
 theme   = {}
 confdir = awful.util.getdir("config")
-theme.wallpaper_cmd = { "/usr/bin/nitrogen --restore" }
---theme.wallpaper_cmd = { "awsetbg /usr/share/awesome/themes/zenburn/zenburn-background.png" }
+--theme.wallpaper_cmd = { "/usr/bin/nitrogen --restore" }
+--theme.wallpaper_cmd = { "awsetbg -c /home/ken/picture/arch.png" }
 -- }}}
 
 
 -- {{{ Styles
-theme.font      = "Profont 8"
+theme.font      = "terminus 9"
 
 -- {{{ Colors
 theme.fg_normal = "#DCDCCC"
@@ -59,7 +59,6 @@ theme.border_widget    = "#3F3F3F"
 -- }}}
 -- }}}
 
-
 -- {{{ Icons
 --
 -- {{{ Taglist icons
@@ -101,6 +100,7 @@ theme.widget_vol    = confdir .. "/icons/vol.png"
 theme.widget_org    = confdir .. "/icons/cal.png"
 theme.widget_date   = confdir .. "/icons/time.png"
 theme.widget_crypto = confdir .. "/icons/crypto.png"
+theme.widget_music  = confdir .. "/icons/music.png"
 -- }}}
 
 -- {{{ Titlebar icons
