@@ -1,31 +1,32 @@
+! -- My cursor !
 Xcursor.theme:Oxygen_Black 
 
 !-- Tango color scheme
 !black
 !*color0: #2e3436
-*color0: #1e1e1e
-*color8: #555753
+!*color0: #1e1e1e
+!*color8: #555753
 !red
-*color1: #cc0000
-*color9: #ef2929
+!*color1: #cc0000
+!*color9: #ef2929
 !green
-*color2: #4e9a06
-*color10: #8ae234
+!*color2: #4e9a06
+!*color10: #8ae234
 !yellow
-*color3: #c4a000
-*color11: #fce94f
+!*color3: #c4a000
+!*color11: #fce94f
 !blue
-*color4: #3465a4
-*color12: #729fcf
+!*color4: #3465a4
+!*color12: #729fcf
 !magenta
-*color5: #75507b
-*color13: #ad7fa8
+!*color5: #75507b
+!*color13: #ad7fa8
 !cyan
-*color6: #0b939b
-*color14: #00f5e9
+!*color6: #0b939b
+!*color14: #00f5e9
 !white
-*color7: #d3d7cf
-*color15: #eeeeec
+!*color7: #d3d7cf
+!*color15: #eeeeec
 
 ! ---| thayer bright |--- {{{
 !black
@@ -54,23 +55,6 @@ Xcursor.theme:Oxygen_Black
 !*color15:                 #ffffff
 !}}}
 
-! ---| Colorful Obsolescence |--- {{{
-!*color0:				#000000
-!*color8:				#555555
-!*color1:				#EE3C3C
-!*color9:				#FF5555
-!*color2:				#00BB00
-!*color10:				#55FF55
-!*color3:				#FFD955
-!*color11:				#FFFF55
-!*color4:				#5555FF
-!*color12:				#008ED1
-!*color5:				#992299
-!*color13:				#FF55FF
-!*color6:				#00AAAA
-!*color14:				#00FFFF
-!*color7:				#BBBBBB
-!*color15:				#FFFFFF
 !!=============================================================================
 !! 设置 Xftp.dpi(字体分辨率）
 !!=============================================================================
@@ -105,7 +89,7 @@ NetHack*map*white:              white
 !! RXVT-unicode setting
 !!=============================================================================
 !urxvt setting
-URxvt*geometry:		80x24
+URxvt*geometry:		80x30
 
 URxvt.scrollBar:	False
 URxvt.scrollstyle:	next
@@ -119,9 +103,8 @@ URxvt.scrollWithBuffer: True
 !set the artificial transparency of the v.t.
 URxvt.inheritPixmap:	True
 !URxvt.backgroundPixmap:     /home/roylez/pic/wallpaper/crest.xpm
-!URxvt.background:	#2e2e2e
 !设置前景色
-URxvt.foreground: white
+!URxvt.foreground: white
 !!设置背景色
 URxvt.background: rgba:0000/0000/0000/cccc
 !!设置颜色深度
@@ -136,14 +119,14 @@ URxvt.fadeColor:        honeydew3
 !URxvt.borderLess:       True
 URxvt.cursorBlink:      False
 !URxvt.cursorUnderline:  True
-URxvt.cursorColor:      white
+!URxvt.cursorColor:      white
 URxvt.colorBD:		yellow
-URxvt.colorUL:		white
+URxvt.colorUL:		cyan
 !URxvt.shading:		60
 !URxvt.fading:		30
 URxvt*underlineURLs:    true
 
-URxvt.saveLines:	1500
+URxvt.saveLines:	15000
 !allow double click to select URL
 URxvt*cutchars:         `"()'*<>[]{|}
 !this makes urxvt to start faster??
@@ -155,13 +138,18 @@ URxvt.keysym.Delete:       \033[3~
 
 !italicFont and boldItalicFont undefined
 !URxvt.font:             xft:Luxi Mono:regular:antialias=True:pixelsize=15, 
-URxvt.font:             xft:Monaco:medium:antialias=True:pixelsize=12, \
-                xft:Droid Sans Mono:Medium:antialias=True:pixelsize=14, \
-                xft:wenquanyi bitmap song:medium:pixelsize=14:antialias=True
+URxvt.font:             xft:dina:medium:antialias=True:pixelsize=12, \
+                xft:Droid Sans Mono:Medium:antialias=True:pixelsize=15, \
+                xft:wenquanyi bitmap song:medium:pixelsize=12:antialias=False
 !URxvt.boldFont:         xft:Luxi Mono:bold:antialias=True:pixelsize=15, 
-URxvt.boldFont:         xft:Monaco:bold:antialias=True:pixelsize=12, \
-                xft:Droid Sans Mono:bold:antialias=True:pixelsize=14, \
-                xft:wenquanyi bitmap song:bold:pixelsize=14:antialias=True
+URxvt.boldFont:         xft:dina:bold:antialias=True:pixelsize=12, \
+                xft:Droid Sans Mono:bold:antialias=True:pixelsize=15, \
+                xft:wenquanyi bitmap song:bold:pixelsize=12:antialias=True
+
+!handle url
+URxvt.urlLauncher: firefox
+URxvt.matcher.button: 1
+URxvt.perl-ext-common: matcher
 
 !!--------------------xterm settings------------------------------------ 
 !look and feel
@@ -173,8 +161,8 @@ xterm*geometry: 80x24
 xterm*scrollBar: false
 xterm*rightScrollBar: true
 xterm*loginshell: true
-xterm*background: #2e2e2e
-xterm*foreground: white 
+!xterm*background: #2e2e2e
+!xterm*foreground: white 
 xterm*borderLess: true
 xterm*colorUL: yellow
 xterm*colorBD: green
@@ -182,7 +170,7 @@ xterm*cursorBlink: false
 !xterm*cursorColor: green
 !xterm*cursorColor: OliveDrab1
 !xterm*cursorColor: RoyalBlue1
-XTerm*cursorColor:DarkSeaGreen3
+!XTerm*cursorColor:DarkSeaGreen3
 XTerm*cursorColorBackground:DimGray
 XTerm*highlight:LemonChiffon
 XTerm*borderColor:SlateGrey
@@ -227,11 +215,11 @@ xterm*locale: true
 xterm.utf8: true
 xterm*utf8Title: true
 xterm*fontMenu*fontdefault*Label: Default
-xterm*faceName: Monaco:antialias=True:pixelsize=13:charwidth=8
-!xterm*faceName: monofur:antialias=True:pixelsize=15
+!xterm*faceName: Monaco:antialias=True:pixelsize=12:charwidth=8
+xterm*faceName: dina:antialias=True:pixelsize=12
 !xterm*faceName: DejaVu Sans Mono:antialias=True:pixelsize=15
-xterm*faceNameDoublesize: Droid Sans Fallback:pixelsize=14:antialias=True
-!xterm*faceNameDoublesize: Wenquanyi Bitmap Song:pixelsize=15:antialias=True
+!xterm*faceNameDoublesize: Droid Sans Fallback:pixelsize=12:antialias=True
+xterm*faceNameDoublesize: Wenquanyi Bitmap Song:pixelsize=12:antialias=True
 !xterm*faceNameDoublesize: YaHei Consolas Hybrid:pixelsize=14:antialias=True
 xterm*xftAntialias: true
 !xterm*jkWidth:false 
@@ -239,3 +227,85 @@ xterm*xftAntialias: true
 
 !allow selecting email/url by double click
 XTerm*charClass: 33:48,37-38:48,45-47:48,64:48,58:48,126:48,61:48,63:48,43:48,35:48
+
+! terminal colors ------------------------------------------------------------
+! A tango-esque light theme
+
+*foreground:#a0a0a0
+*background:#1B1D1E
+
+!black
+*color0:    #1B1D1E
+*color8:    #505354
+!red
+*color1:    #F92672
+*color9:    #FF669D
+!green
+*color2:    #A6E22E
+*color10:   #BEED5F
+!yellow
+*color3:    #FD971F
+*color11:   #E6DB74
+!blue
+*color4:    #66D9EF
+*color12:   #66D9EF
+!magenta
+*color5:    #9E6FFE
+*color13:   #9E6FFE
+!cyan
+*color6:    #5E7175
+*color14:   #A3BABF
+!white
+*color7:    #CCCCC6
+*color15:   #F8F8F2
+
+! Zenburn color-scheme
+!urxvt*background:  #3f3f3f
+!urxvt*foreground:  #dcdccc
+! black + red
+!urxvt*color0:     #3f3f3f
+!urxvt*color0:      #1E2320
+!urxvt*color1:      #705050
+! green + yellow
+!urxvt*color2:      #60b48a
+!urxvt*color3:      #dfaf8f
+! blue + purple
+!urxvt*color4:      #506070
+!urxvt*color5:      #dc8cc3
+! cyan + white
+!urxvt*color6:      #8cd0d3
+!urxvt*color7:      #dcdccc
+! bright-black + bright-red
+!urxvt*color8:      #709080
+!urxvt*color9:      #dca3a3
+! bright-green + bright-yellow
+!urxvt*color10:     #c3bf9f
+!urxvt*color11:     #f0dfaf
+! bright-blue + bright-purple
+!urxvt*color12:     #94bff3
+!urxvt*color13:     #ec93d3
+! bright-cyan + bright-white
+!urxvt*color14:     #93e0e3
+!urxvt*color15:     #ffffff
+!}}}
+
+! Zenburn
+!xterm*background:  #3f3f3f
+!xterm*foreground:  #dcdccc
+!xterm*color0:      #1E2320
+!xterm*color1:      #705050
+!xterm*color2:      #60b48a
+!xterm*color3:      #dfaf8f
+!xterm*color4:      #506070
+!xterm*color5:      #dc8cc3
+!xterm*color6:      #8cd0d3
+!xterm*color7:      #dcdccc
+!xterm*color8:      #709080
+!xterm*color9:      #dca3a3
+!xterm*color10:     #c3bf9f
+!xterm*color11:     #f0dfaf
+!xterm*color12:     #94bff3
+!xterm*color13:     #ec93d3
+!xterm*color14:     #93e0e3
+!xterm*color15:     #ffffff
+!}}}
