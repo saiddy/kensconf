@@ -1,13 +1,34 @@
 #!/bin/bash
+wlanIF="eth0"
+interval=3
+rx=0
+tx=0
+net_gettrans(){
+   traffic=$(sudo ifconfig $wlanIF | grep bytes | cut -d: -f2-3)
+   rx=${traffic%% *}
+   tx=${traffic#*:}
+   tx=${tx%% *}
+   rx=$(( $rx/1000 ))
+   tx=$(( $tx/1000 ))
+}
+
 while true
 do
-  echo 0 widget_tell top clock text "`date +"%a %Y-%m-%d %H:%M"`" | awesome-client
-#  echo 0 widget_tell top mem data mem_used `free -m | tail -n 2 | head -n 1 | awk '{print $3}'` | awesome-client
-  echo 0 widget_tell top mem text "Mem:`free -m | tail -n 2 | head -n 1 | awk '{print $3}'`/1024Mb" | awesome-client
-  echo 0 widget_tell top cpu_temp text "Temp:`cat /sys/class/hwmon/hwmon0/device/temp2_input | cut -c1,2 `°C " | awesome-client
-  echo 0 widget_tell top cpu_freq text "CPU:`cat /proc/cpuinfo | tail -n 15 |head -n 1 |awk '{print $4}'| cut -c1,2,3,4`MHz " | awesome-client
+    rxp=$rx
+    txp=$tx
+    net_gettrans
+    net="Dn:$(( ($rx - $rxp) / $interval ))KB/s - Up:$(( ($tx - $txp) / $interval ))KB/s"
+    
+    echo 0 widget_tell top clock text "`date +"%m-%d %H:%M"`" | awesome2-client
+    echo 0 widget_tell top mem text "Mem:`free -m | tail -n 2 | head -n 1 | awk '{print $3}'`/1024Mb" | awesome2-client
+    echo 0 widget_tell top cpu_temp text "Temp:`cat /sys/class/hwmon/hwmon0/device/temp2_input | cut -c1,2 `°C" | awesome2-client
+    echo 0 widget_tell top cpu_freq text "CPU:`cat /proc/cpuinfo | tail -n 15 |head -n 1 |awk '{print $4}'| cut -c1,2,3,4`MHz " | awesome2-client
+    echo 0 widget_tell top mail text "Mail:`ls /home/ken/Mail/Google/new | wc -l`" | awesome2-client
+    echo 0 widget_tell top vol text "Vol:`amixer get Master |tail -n 1 |awk '{print $5}'`" | awesome2-client
+    echo 0 widget_tell top net text "$net" | awesome2-client
+
 #  echo 0 widget_tell top cpu_avg text "Load:`uptime |tail -n 1  |awk '{print $8 $9 $10}'`" | awesome-client
 #  echo 0 widget_tell top cpu_per text `top -n 1 |tail -n +3 |head -n 1 |awk '{print $2}' |cut -c1,2,3,4,5` | awesome-client
-#  echo 0 widget_tell top mpd text "`mpc | head -n 1`" | awesome-client
+    echo 0 widget_tell top mpd text "`mpc | head -n 1`" | awesome2-client
   sleep 5
 done
