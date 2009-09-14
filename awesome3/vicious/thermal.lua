@@ -16,12 +16,12 @@ module("vicious.thermal")
 -- {{{ Thermal widget type
 local function worker(format, thermal_zone)
     -- Get thermal zone
-    local f = io.open("/proc/acpi/thermal_zone/" .. thermal_zone .. "/temperature")
+    local f = io.open("/sys/class/hwmon/hwmon0/device/temp2_input")
     local line = f:read("*line")
     f:close()
 
     -- Get temperature data
-    local temperature = line:match("[%d]?[%d]?[%d]")
+    local temperature = line:match("[%d]?[%d]")
 
     return {temperature}
 end

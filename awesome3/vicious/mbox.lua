@@ -27,7 +27,7 @@ local function worker(format, mbox)
     f:close()
 
     -- Find subject lines
-    for match in string.gfind(text, "Subject: ([^\n]*)") do
+    for match in string.gfind(text, "N ([^\n]*)") do
         subject = match
     end
 

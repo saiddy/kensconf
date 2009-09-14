@@ -27,7 +27,7 @@ local function worker(format)
             -- table for each mount point with gmatch
             local size, used, avail, usep, mount =
              -- Instead match all at once, including network file systems
-             line:match("^[%w%p]+[%s]+([%d%.]+)[%a]?[%s]+([%d%.]+)[%a]?[%s]+([%d%.]+)[%a]?[%s]+([%d]+)%%[%s]+([%w%p]+)$")
+             line:match("^[/%w:%.-]+[%s]+([%d%.]+)[%a]?[%s]+([%d%.]+)[%a]?[%s]+([%d%.]+)[%a]?[%s]+([%d]+)%%[%s]+([/%w:%.-]+)$")
 
             fs_info["{"..mount.." size}"]  = size
             fs_info["{"..mount.." used}"]  = used

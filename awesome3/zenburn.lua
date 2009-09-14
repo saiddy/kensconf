@@ -7,13 +7,14 @@
 -- {{{ Main
 theme   = {}
 confdir = awful.util.getdir("config")
---theme.wallpaper_cmd = { "/usr/bin/nitrogen --restore" }
---theme.wallpaper_cmd = { "awsetbg -c /home/ken/picture/arch.png" }
+theme.wallpaper_cmd = { "/usr/bin/nitrogen --restore" }
+--theme.wallpaper_cmd = { "awsetbg -c /usr/share/awesome/themes/zenburn/zenburn-background.png" }
 -- }}}
 
 
 -- {{{ Styles
-theme.font      = "terminus 9"
+-- theme.font      = "Profont 9"
+theme.font      = "WenQuanYi Bitmap Song 9"
 
 -- {{{ Colors
 theme.fg_normal = "#DCDCCC"
@@ -21,14 +22,19 @@ theme.fg_focus  = "#F0DFAF"
 theme.fg_urgent = "#CC9393"
 theme.bg_normal = "#3F3F3F"
 theme.bg_focus  = "#1E2320"
-theme.bg_urgent = "#3F3F3F"
+--theme.bg_urgent = "#3F3F3F"
+theme.bg_urgent = "#75507B"
 -- }}}
+--theme.bg_focus = "#3465A4"
 
 -- {{{ Borders
 theme.border_width  = "1"
-theme.border_normal = "#3F3F3F"
-theme.border_focus  = "#6F6F6F"
-theme.border_marked = "#CC9393"
+--theme.border_normal = "#3F3F3F"
+--theme.border_focus  = "#6F6F6F"
+--theme.border_marked = "#CC9393"
+theme.border_normal = "#2e3735"
+theme.border_focus  = "#afc81c"
+theme.border_marked = "#91231c"
 -- }}}
 
 -- {{{ Titlebars
@@ -48,6 +54,14 @@ theme.bg_widget        = "#3F3F3F"
 theme.border_widget    = "#3F3F3F"
 -- }}}
 
+-- {{{ Mouse finder
+theme.mouse_finder_color = "#CC9393"
+-- theme.mouse_finder_[timeout|animate_timeout|radius|factor]
+-- }}}
+
+-- {{{ Tooltips
+-- theme.tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
+-- }}}
 -- {{{ Taglist and Tasklist
 -- theme.[taglist|tasklist]_[bg|fg]_[focus|urgent]
 -- }}}
@@ -59,7 +73,9 @@ theme.border_widget    = "#3F3F3F"
 -- }}}
 -- }}}
 
+
 -- {{{ Icons
+--     - http://sysphere.org/~anrxc/icons-zenburn-anrxc.tar.gz
 --
 -- {{{ Taglist icons
 theme.taglist_squares_sel   = confdir .. "/icons/taglist/squarefz.png"
@@ -70,7 +86,7 @@ theme.taglist_squares_unsel = confdir .. "/icons/taglist/squareza.png"
 -- {{{ Misc icons
 --theme.awesome_icon           = confdir .. "/icons/awesome.png"
 --theme.menu_submenu_icon      = "/usr/share/awesome/themes/default/submenu.png"
---theme.tasklist_floating_icon = "/usr/share/awesome/themes/default/tasklist/floatingw.png"
+theme.tasklist_floating_icon = "/usr/share/awesome/themes/default/tasklist/floatingw.png"
 -- }}}
 
 -- {{{ Layout icons
@@ -128,6 +144,5 @@ theme.titlebar_maximized_button_focus_inactive  = confdir .. "/icons/titlebar/ma
 theme.titlebar_maximized_button_normal_inactive = confdir .. "/icons/titlebar/maximized_normal_inactive.png"
 -- }}}
 -- }}}
-
 
 return theme

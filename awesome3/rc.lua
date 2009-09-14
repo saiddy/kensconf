@@ -1,7 +1,7 @@
 -- {{{ Header
 --
--- Awesome configuration file, using awesome 3.4-git on Arch GNU/Linux.
---   * Adrian C. <anrxc_at_sysphere_org>
+-- Awesome configuration, using awesome 3.4-rc1 on Arch GNU/Linux
+--   * Adrian C. <anrxc.sysphere.org>
 
 -- Screenshot: http://sysphere.org/gallery/snapshots
 
@@ -13,18 +13,19 @@
 --        Everything is done with the keyboard.
 
 --   3. Why these colors? 
---        It's Zenburn. Awesome, Emacs, Urxvt, Alpine... all use these colors.
+--        It's Zenburn; Awesome, Emacs, Alpine... all use it.
 --          - http://slinky.imukuppi.org/zenburnpage/
 
---      3a. My .Xdefaults can be found here: 
+--      3a. My .Xdefaults (and .xinitrc) can be found here: 
 --            - http://git.sysphere.org/dotfiles/
 
 --   4. Fonts used on my desktop: 
 --        Terminus  : http://www.is-vn.bg/hamster
 --        Profont   : http://www.tobias-jung.de/seekingprofont
 
--- This work is licensed under the Creative Commons Attribution-Share Alike License.
--- To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/
+-- This work is licensed under the Creative Commons Attribution
+-- Share Alike License. To view a copy of this license, visit:
+--   - http://creativecommons.org/licenses/by-sa/3.0/
 -- }}}
 
 
@@ -42,15 +43,13 @@ require("teardrop")
 --
 -- Zenburn theme
 beautiful.init(awful.util.getdir("config") .. "/zenburn.lua")
---theme_path = os.getenv("HOME") .. "/.config/awesome/zenburn.lua"
---beautiful.init(theme_path)
 
 -- Modifier keys
-altkey = "Mod1"      -- Alt_L
-modkey = "Mod4"      -- Super_L
+altkey = "Mod1" -- Alt_L
+modkey = "Mod4" -- Super_L
 
 -- Window titlebars
-use_titlebar = false -- True for floaters (manage signal)
+--use_titlebar = false -- True for floaters (manage signal)
 
 -- Window management layouts
 layouts = {
@@ -76,7 +75,7 @@ layouts = {
 tags = {}
 tags.settings = {
     { name = "main",  layout = layouts[2]  },
-    { name = "web",   layout = layouts[1]  },
+	{ name = "web",   layout = layouts[1]  },
     { name = "code",  layout = layouts[3]  },
     { name = "doc",   layout = layouts[7]  },
     { name = "im",    layout = layouts[1], mwfact = 0.75 },
@@ -109,7 +108,6 @@ end
 spacer         = widget({ type = "textbox", name = "spacer" })
 separator      = widget({ type = "textbox", name = "separator" })
 spacer.text    = " "
---separator.text = "//"
 separator.text = '<span color="#3579a8">|</span>'
 -- }}}
 
@@ -345,10 +343,10 @@ for s = 1, screen.count() do
         spacer, memwidget, spacer, mmwidget, memicon,
         separator,
         cpuwidget, spacer, cuwidget, thermalwidget, cpuicon,
-		separator,
-		mpdwidget, mpdicon,
-		separator,
-		tasklist[s],
+	separator,
+	mpdwidget, mpdicon,
+	separator,
+	tasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
 end
@@ -382,15 +380,16 @@ clientbuttons = awful.util.table.join(
 globalkeys = awful.util.table.join(
     -- {{{ Applications
     awful.key({ modkey }, "Return", function () awful.util.spawn("xterm", false) end),
-	awful.key({ modkey }, "r", function () awful.util.spawn("dmenu_run -fn \"-*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*\" -nb \"#daff30\" -nf \"#888888\" -sb \"#2A2A2A\" -sf \"#daff30\"", false) end),
+    awful.key({ modkey }, "r", function () awful.util.spawn("dmenu_run -fn \"-*-terminus-medium-r-normal-*-12-*-*-*-*-*-*-*\" -nb \"#daff30\" -nf \"#888888\" -sb \"#2A2A2A\" -sf \"#daff30\"", false) end),
     awful.key({ modkey, "Shift" }, "w", function () awful.util.spawn("thunar", false) end),
     awful.key({ modkey, "Shift" }, "f", function () awful.util.spawn("firefox", false) end),
     awful.key({ altkey }, "F1",  function () awful.util.spawn("urxvt", false) end),
-    awful.key({ modkey }, "F2",  function () teardrop.toggle("gmrun", 1, 0.08) end),
+    awful.key({ altkey }, "`", function () teardrop("urxvt", "bottom") end),
+    awful.key({ modkey }, "F2",  function () teardrop("gmrun", nil, nil, nil, 0.08) end),
     awful.key({ modkey, "Shift" }, "Down", function () awful.util.spawn("amixer -q sset Master 2dB-", false) end),
-	awful.key({ modkey, "Shift" }, "Up", function () awful.util.spawn("amixer -q sset Master 2dB+", false) end),
-	awful.key({ modkey, "Shift" }, "Right", function () awful.util.spawn("mpc next", false) end),
-	awful.key({ modkey, "Shift" }, "Left", function () awful.util.spawn("mpc stop", false) end),
+    awful.key({ modkey, "Shift" }, "Up", function () awful.util.spawn("amixer -q sset Master 2dB+", false) end),
+    awful.key({ modkey, "Shift" }, "Right", function () awful.util.spawn("mpc next", false) end),
+    awful.key({ modkey, "Shift" }, "Left", function () awful.util.spawn("mpc stop", false) end),
 	-- }}}
 
     -- {{{ Multimedia keys
@@ -408,7 +407,7 @@ globalkeys = awful.util.table.join(
         awful.prompt.run({ prompt = "Dictionary: " }, promptbox[mouse.screen].widget,
             function (words)
                 local xmessage = "xmessage -timeout 10 -file -"
-                awful.util.spawn_with_shell("crodict " .. words .. " | " .. xmessage, false)
+                awful.util.spawn("/home/ken/bin/meow.py " .. words, false)
             end)
     end),
     awful.key({ altkey }, "F4", function ()
@@ -441,6 +440,7 @@ globalkeys = awful.util.table.join(
     -- }}}
 
     -- {{{ Awesome controls
+    awful.key({ modkey, "Shift" }, "m", function () awful.mouse.finder():find() end),
     awful.key({ modkey, "Shift" }, "BackSpace", awesome.quit),
     awful.key({ modkey, "Shift" }, "r", function ()
         promptbox[mouse.screen].text = awful.util.escape(awful.util.restart())
@@ -448,7 +448,7 @@ globalkeys = awful.util.table.join(
     -- }}}
 
     -- {{{ Tag browsing
-	awful.key({ altkey }, "Tab",    awful.tag.viewnext),
+    awful.key({ altkey }, "Tab",    awful.tag.viewnext),
     awful.key({ altkey }, "n",      awful.tag.viewnext),
     awful.key({ altkey }, "p",      awful.tag.viewprev),
     awful.key({ altkey }, "Escape", awful.tag.history.restore),
@@ -537,8 +537,13 @@ clientkeys = awful.util.table.join(
         if c.titlebar then awful.titlebar.remove(c) 
         else awful.titlebar.add(c, { modkey = modkey }) end
     end),
-    awful.key({ modkey, "Control" }, "r",      function (c) c:redraw() end),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle),
+    awful.key({ modkey, "Control" }, "r",     function (c) c:redraw() end),
+    awful.key({ modkey, "Control" }, "space", function (c)
+        awful.client.floating.toggle(c)
+        if awful.client.floating.get(c) then
+             c.above = true;  awful.titlebar.add(c)
+        else c.above = false; awful.titlebar.remove(c) end
+    end),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     -- Suspend/resume on focus changes could be auto. when running on bat power, if only suspending FF:
     awful.key({ modkey, "Shift" }, "c", function (c) awful.util.spawn("kill -CONT "..c.pid, false) end),
@@ -556,32 +561,28 @@ end
 -- {{{ Tag controls
 for i = 1, keynumber do
     globalkeys = awful.util.table.join( globalkeys,
-        awful.key({ modkey }, i,
-            function ()
-                local screen = mouse.screen
-                if tags[screen][i] then
-                    awful.tag.viewonly(tags[screen][i])
-                end
-            end),
-        awful.key({ modkey, "Control" }, i,
-            function ()
-                local screen = mouse.screen
-                if tags[screen][i] then
-                    awful.tag.viewtoggle(tags[screen][i])
-                end
-            end),
-        awful.key({ modkey, "Shift" }, i,
-            function ()
-                if client.focus and tags[client.focus.screen][i] then
-                    awful.client.movetotag(tags[client.focus.screen][i])
-                end
-            end),
-        awful.key({ modkey, "Control", "Shift" }, i,
-            function ()
-                if client.focus and tags[client.focus.screen][i] then
-                    awful.client.toggletag(tags[client.focus.screen][i])
-                end
-            end))
+        awful.key({ modkey }, i, function ()
+            local screen = mouse.screen
+            if tags[screen][i] then
+                awful.tag.viewonly(tags[screen][i])
+            end
+        end),
+        awful.key({ modkey, "Control" }, i, function ()
+            local screen = mouse.screen
+            if tags[screen][i] then
+                awful.tag.viewtoggle(tags[screen][i])
+            end
+        end),
+        awful.key({ modkey, "Shift" }, i, function ()
+            if client.focus and tags[client.focus.screen][i] then
+                awful.client.movetotag(tags[client.focus.screen][i])
+            end
+        end),
+        awful.key({ modkey, "Control", "Shift" }, i, function ()
+            if client.focus and tags[client.focus.screen][i] then
+                awful.client.toggletag(tags[client.focus.screen][i])
+            end
+        end))
 end
 -- }}}
 
@@ -637,7 +638,7 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "Xmessage", instance = "xmessage" },
       properties = { floating = true } },
-    { rule = { class = "ROX%-Filer" },
+    { rule = { class = "ROX-Filer" },
       properties = { floating = true } },
     { rule = { class = "Ark" },
       properties = { floating = true } },
@@ -677,24 +678,23 @@ end
 --
 -- {{{ Signal function to execute when a new client appears
 client.add_signal("manage", function (c, startup)
-    -- Add a titlebar to each client if enabled globaly
-    if use_titlebar then
-        awful.titlebar.add(c, { modkey = modkey })
-    -- Floating clients always have titlebars
-    elseif awful.client.floating.get(c)
-        or awful.layout.get(c.screen) == awful.layout.suit.floating then
-            if not c.titlebar and c.class ~= "Xmessage" then
-                awful.titlebar.add(c, { modkey = modkey })
-            end
-            -- Floating clients are always on top
-            c.above = true
+    -- Add a titlebar to each floating client
+    if awful.client.floating.get(c) or
+        awful.layout.get(c.screen) == awful.layout.suit.floating
+    then
+        if not c.titlebar and c.class ~= "Xmessage" then
+            awful.titlebar.add(c, { modkey = modkey })
+        end
+
+        -- Floating clients are always on top
+        c.above = true
     end
 
     -- Enable sloppy focus
-    c:add_signal("mouse::enter", function(c)
+    c:add_signal("mouse::enter", function (c)
         if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-            and awful.client.focus.filter(c) then
-            client.focus = c
+           and awful.client.focus.filter(c) then
+               client.focus = c
         end
     end)
 
@@ -709,14 +709,13 @@ client.add_signal("manage", function (c, startup)
     --   - are centered on the screen
     --awful.placement.centered(c, c.transient_for)
 
-    -- Honoring of size hints
-    --   - false will remove gaps between windows
+    -- Honor size hints
     c.size_hints_honor = false
 end)
 -- }}}
 
 -- {{{ Focus signal functions
-client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.add_signal("focus",   function (c) c.border_color = beautiful.border_focus end)
+client.add_signal("unfocus", function (c) c.border_color = beautiful.border_normal end)
 -- }}}
 -- }}}
