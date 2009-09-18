@@ -1,0 +1,31 @@
+#!/bin/sh
+wlanIF="eth0"
+interval=3
+rx=0
+tx=0
+net_gettrans(){
+   traffic=$(sudo ifconfig $wlanIF | grep bytes | cut -d: -f2-3)
+   rx=${traffic%% *}
+   tx=${traffic#*:}
+   tx=${tx%% *}
+
+   rx=$(( $rx/1000 ))
+   tx=$(( $tx/1000 ))
+}
+
+while true; do
+    rxp=$rx
+    txp=$tx
+    net_gettrans
+    net="Dn:$(( ($rx - $rxp) / $interval ))KB/s - Up:$(( ($tx - $txp) / $interval ))KB/s"
+    mpd="`mpc | head -n 1`"
+    mail="`ls /home/ken/Mail/Google/new | wc -l`"  
+	mail2="Mail:`ls /home/ken/Mail/INBOX/new | wc -l`"
+    cpu="Cpu:`cat /sys/class/hwmon/hwmon1/device/temp2_input | cut -c1,2 `°C `cat /proc/cpuinfo | tail -n 15 |head -n 1 |awk '{print $4}'| cut -c1,2,3,4`MHz"
+    mem="Ram:`free -m | tail -n 2 | head -n 1 | awk '{print $3}'`Mb"
+    vol="Vol:`amixer get Master |awk '/Front\ Left:/ {print $5}'`"
+    time="$(date '+%A %y-%m-%d %H:%M')"
+										    
+    xsetroot -name "$mpd ;; $net ;; $mail2 - $mail ;; $cpu ;; $mem ;; $vol ;; $time"
+    sleep $interval
+done
